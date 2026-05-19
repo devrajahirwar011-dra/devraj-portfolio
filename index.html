@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Devraj Ahirwar | Portfolio</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas id="three-bg"></canvas>
+    <div class="overlay"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#hero">Devraj</a>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="resume-btn" onclick="window.open('assets/Devraj-Ahirwar-Resume.pdf','_blank')">
+        Resume
+      </button>
+    </header>
+
+    <main class="page-container">
+      <section class="hero section" id="hero">
+        <div class="hero-content slide-up">
+          <p class="eyebrow">Futuristic Developer Portfolio</p>
+          <h1 class="hero-title">
+            <span class="glow-text">Devraj Ahirwar</span>
+          </h1>
+          <p class="hero-subtitle">
+            <span id="typing-text"></span>
+          </p>
+          <p class="hero-description">
+            B.Tech AI & Data Science Student | Coding & Technology Enthusiast | Web & Game Developer
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View Projects</a>
+            <a class="btn btn-secondary" href="#contact">Contact Me</a>
+            <a class="btn btn-outline" href="assets/Devraj-Ahirwar-Resume.pdf" download>
+              Download Resume
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="about section" id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-grid reveal">
+          <div class="about-text glass-card">
+            <p>
+              I am passionate about programming, AI, web development, and game development.
+              I love creating interactive experiences, intelligent systems, and futuristic user interfaces.
+              I build clean, modern websites and explore the power of machine learning, data science, and game engines.
+            </p>
+          </div>
+          <div class="about-cards">
+            <div class="info-card">
+              <h3>AI & Data Science</h3>
+              <p>Learning models, data pipelines, and building AI-driven tools.</p>
+            </div>
+            <div class="info-card">
+              <h3>Web Development</h3>
+              <p>Crafting responsive websites, animations, and sleek UI interactions.</p>
+            </div>
+            <div class="info-card">
+              <h3>Game Development</h3>
+              <p>Designing immersive gameplay experiences and polished visual presentations.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="skills section" id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skill-grid reveal">
+          <div class="skill-card glow-card">
+            <h3>Python</h3>
+            <p>Data science scripting, automation, and machine learning prototyping.</p>
+          </div>
+          <div class="skill-card glow-card">
+            <h3>HTML</h3>
+            <p>Semantic structure, responsive layouts, and accessible markup.</p>
+          </div>
+          <div class="skill-card glow-card">
+            <h3>CSS</h3>
+            <p>Advanced styling, animations, glassmorphism, and gradients.</p>
+          </div>
+          <div class="skill-card glow-card">
+            <h3>JavaScript</h3>
+            <p>Interactive logic, DOM control, animations, and modern UX patterns.</p>
+          </div>
+          <div class="skill-card glow-card">
+            <h3>AI & Data Science</h3>
+            <p>Model training, analysis, and building intelligent applications.</p>
+          </div>
+          <div class="skill-card glow-card">
+            <h3>Game Development</h3>
+            <p>Designing game systems, visuals, and player-focused interfaces.</p>
+          </div>
+          <div class="skill-card glow-card">
+            <h3>Git & GitHub</h3>
+            <p>Version control, collaboration, and repository workflows.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="projects section" id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid reveal">
+          <article class="project-card glass-card">
+            <div class="project-image placeholder"></div>
+            <div class="project-content">
+              <h3>Neon UI Dashboard</h3>
+              <p>Futuristic UI design with animated charts, responsive widgets, and modern layout.</p>
+              <div class="project-actions">
+                <a class="project-btn" href="#" target="_blank">GitHub</a>
+                <a class="project-btn" href="#" target="_blank">Live Demo</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card glass-card">
+            <div class="project-image placeholder"></div>
+            <div class="project-content">
+              <h3>AI Chat Assistant</h3>
+              <p>An intelligent assistant interface with conversation memory and futuristic design.</p>
+              <div class="project-actions">
+                <a class="project-btn" href="#" target="_blank">GitHub</a>
+                <a class="project-btn" href="#" target="_blank">Live Demo</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card glass-card">
+            <div class="project-image placeholder"></div>
+            <div class="project-content">
+              <h3>Game Prototype</h3>
+              <p>A polished game concept showcasing interactive movement, particle effects, and design polish.</p>
+              <div class="project-actions">
+                <a class="project-btn" href="#" target="_blank">GitHub</a>
+                <a class="project-btn" href="#" target="_blank">Live Demo</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card glass-card">
+            <div class="project-image placeholder"></div>
+            <div class="project-content">
+              <h3>Portfolio Redesign</h3>
+              <p>A modern developer portfolio featuring dark mode, animations, and responsive visuals.</p>
+              <div class="project-actions">
+                <a class="project-btn" href="#" target="_blank">GitHub</a>
+                <a class="project-btn" href="#" target="_blank">Live Demo</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact section" id="contact">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-grid reveal">
+          <div class="contact-panel glass-card">
+            <h3>Let's create something awesome together.</h3>
+            <p>Reach out for projects, collaborations, or just to say hello.</p>
+            <div class="social-links">
+              <a href="#" target="_blank">GitHub</a>
+              <a href="#" target="_blank">LinkedIn</a>
+              <a href="#" target="_blank">Instagram</a>
+            </div>
+          </div>
+          <form class="contact-form glass-card" id="contact-form">
+            <label>
+              Name
+              <input type="text" name="name" placeholder="Your name" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" placeholder="Your email" required />
+            </label>
+            <label>
+              Message
+              <textarea name="message" rows="5" placeholder="Your message" required></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit">Send Message</button>
+            <p class="form-note" id="form-note"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-line"></div>
+      <p>© 2026 Devraj Ahirwar. Crafted for a premium developer portfolio.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/examples/js/postprocessing/UnrealBloomPass.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
