@@ -11,13 +11,25 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style-new.css" />
   </head>
   <body>
+    <div class="loader" id="loader">
+      <div class="loader-inner">
+        <div class="loader-ring"></div>
+        <div class="loader-brand">
+          <span class="loader-logo">DA</span>
+          <p>Loading the future...</p>
+        </div>
+      </div>
+    </div>
+
     <canvas id="three-bg"></canvas>
     <div class="overlay"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
 
-    <header class="topbar">
+    <header class="topbar" id="topbar">
       <a class="brand" href="#hero">Devraj</a>
       <nav class="nav-links">
         <a href="#about">About</a>
@@ -32,24 +44,49 @@
 
     <main class="page-container">
       <section class="hero section" id="hero">
-        <div class="hero-content slide-up">
-          <p class="eyebrow">Futuristic Developer Portfolio</p>
-          <h1 class="hero-title">
-            <span class="glow-text">Devraj Ahirwar</span>
-          </h1>
-          <p class="hero-subtitle">
-            <span id="typing-text"></span>
-          </p>
-          <p class="hero-description">
-            B.Tech AI & Data Science Student | Coding & Technology Enthusiast | Web & Game Developer
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#projects">View Projects</a>
-            <a class="btn btn-secondary" href="#contact">Contact Me</a>
-            <a class="btn btn-outline" href="assets/Devraj-Ahirwar-Resume.pdf" download>
-              Download Resume
-            </a>
+        <div class="hero-grid">
+          <div class="hero-content slide-up reveal">
+            <p class="eyebrow">Futuristic Developer Portfolio</p>
+            <h1 class="hero-title">
+              <span class="glow-text">Devraj Ahirwar</span>
+            </h1>
+            <p class="hero-subtitle">
+              <span id="typing-text"></span>
+            </p>
+            <p class="hero-description">
+              B.Tech AI & Data Science Student | Coding & Technology Enthusiast | Web & Game Developer
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#projects">View Projects</a>
+              <a class="btn btn-secondary" href="#contact">Contact Me</a>
+              <a class="btn btn-outline" href="assets/Devraj-Ahirwar-Resume.pdf" download>
+                Download Resume
+              </a>
+            </div>
           </div>
+
+          <aside class="profile-card glass-card floating-card reveal">
+            <div class="profile-ring">
+              <div class="profile-ring-inner"></div>
+              <img src="c:\Users\hp\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\LocalState\sessions\BFA5D524B0573F7947A83A9F73D433C91CE4BDBA\transfers\2026-21\WhatsApp Image 2026-05-23 at 14.20.57.jpeg" alt="Devraj Ahirwar" loading="eager" class="profile-image" onerror="this.style.display='none'; this.closest('.profile-ring').classList.add('no-image');" />
+              <div class="profile-badge">Available for Projects</div>
+            </div>
+            <div class="profile-copy">
+              <span class="profile-role">AI & Data Science Student</span>
+              <h2>Devraj Ahirwar</h2>
+              <p class="profile-about">Blending intelligent systems, polished UI, and responsive web design to build modern digital experiences.</p>
+            </div>
+            <div class="profile-meta">
+              <div>
+                <strong>09+</strong>
+                <span>Projects</span>
+              </div>
+              <div>
+                <strong>4.9</strong>
+                <span>Design Rating</span>
+              </div>
+            </div>
+          </aside>
         </div>
       </section>
 
@@ -205,6 +242,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/examples/js/postprocessing/EffectComposer.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/examples/js/postprocessing/RenderPass.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/examples/js/postprocessing/UnrealBloomPass.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

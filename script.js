@@ -14,6 +14,7 @@ let renderer;
 let composer;
 let backgroundGroup;
 let particleField;
+let starField;
 let waveRibbons = [];
 let mouse = { x: 0, y: 0 };
 const clock = new THREE.Clock();
@@ -45,6 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initWaveBackground();
   setupContactForm();
+  initCursor();
+  initPageAnimations();
+  setupSectionObserver();
+});
+
+window.addEventListener('load', () => {
+  hideLoader();
+  initPageScrollEffects();
 });
 
 function initReveal() {
@@ -100,14 +109,75 @@ function initWaveBackground() {
   backgroundGroup = new THREE.Group();
   scene.add(backgroundGroup);
 
+  createStarField();
   createWaveRibbons();
   createParticleField();
+  createWaveGrid();
   createGlowCores();
   setupPostProcessing();
 
   window.addEventListener('resize', onWindowResize);
   window.addEventListener('mousemove', onMouseMove);
   animateScene();
+}
+
+function createWaveGrid() {
+  const gridSize = 32;
+  const gridSegments = 48;
+  const gridMaterial = new THREE.LineBasicMaterial({
+    color: 0x3de8fb,
+    transparent: true,
+    opacity: 0.18,
+  });
+
+  const gridGeometry = new THREE.BufferGeometry();
+  const gridVertices = [];
+
+  for (let i = -gridSize; i <= gridSize; i += gridSize / gridSegments) {
+    gridVertices.push(-gridSize, -5.6, i, gridSize, -5.6, i);
+    gridVertices.push(i, -5.6, -gridSize, i, -5.6, gridSize);
+  }
+
+  gridGeometry.setAttribute('position', new THREE.Float32BufferAttribute(gridVertices, 3));
+  const gridLines = new THREE.LineSegments(gridGeometry, gridMaterial);
+  backgroundGroup.add(gridLines);
+}
+
+function createStarField() {
+  const stars = 1400;
+  const positions = new Float32Array(stars * 3);
+  const colors = new Float32Array(stars * 3);
+
+  for (let i = 0; i < stars; i++) {
+    const radius = 18 + Math.random() * 20;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos((Math.random() * 2) - 1) * 0.35;
+
+    positions[i * 3] = Math.cos(theta) * radius;
+    positions[i * 3 + 1] = Math.sin(phi) * radius * 0.25 + 3;
+    positions[i * 3 + 2] = Math.sin(theta) * radius;
+
+    const brightness = 0.7 + Math.random() * 0.3;
+    colors[i * 3] = brightness;
+    colors[i * 3 + 1] = brightness;
+    colors[i * 3 + 2] = brightness;
+  }
+
+  const starGeometry = new THREE.BufferGeometry();
+  starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  starGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+  const starMaterial = new THREE.PointsMaterial({
+    size: 1.5,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.9,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  });
+
+  starField = new THREE.Points(starGeometry, starMaterial);
+  scene.add(starField);
 }
 
 function createWaveRibbons() {
@@ -297,6 +367,11 @@ function animateScene() {
     particleField.rotation.x += 0.00015;
   }
 
+  if (starField) {
+    starField.rotation.y += 0.00025;
+    starField.rotation.x += 0.00008;
+  }
+
   composer.render();
   requestAnimationFrame(animateScene);
 }
@@ -313,4 +388,145 @@ function setupContactForm() {
       note.textContent = '';
     }, 5000);
   });
+}
+
+function hideLoader() {
+  const loader = document.getElementById('loader');
+  if (!loader) return;
+  gsap.to(loader, {
+    opacity: 0,
+    duration: 0.8,
+    ease: 'power2.out',
+    onComplete: () => {
+      loader.style.display = 'none';
+    },
+  });
+}
+
+function initCursor() {
+  const cursorDot = document.querySelector('.cursor-dot');
+  const cursorRing = document.querySelector('.cursor-ring');
+  if (!cursorDot || !cursorRing) return;
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ringX = mouseX;
+  let ringY = mouseY;
+  let dotScale = 1;
+  let ringScale = 1;
+
+  const updateCursor = () => {
+    cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) scale(${dotScale})`;
+    ringX += (mouseX - ringX) * 0.18;
+    ringY += (mouseY - ringY) * 0.18;
+    cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) scale(${ringScale})`;
+    requestAnimationFrame(updateCursor);
+  };
+
+  document.addEventListener('mousemove', event => {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+    cursorDot.style.opacity = '1';
+    cursorRing.style.opacity = '1';
+  });
+
+  document.addEventListener('mouseleave', () => {
+    cursorDot.style.opacity = '0';
+    cursorRing.style.opacity = '0';
+  });
+
+  const interactiveTargets = document.querySelectorAll('a, button, .btn, .project-card, .skill-card');
+  interactiveTargets.forEach(target => {
+    target.addEventListener('mouseenter', () => {
+      dotScale = 1.35;
+      ringScale = 1.2;
+    });
+    target.addEventListener('mouseleave', () => {
+      dotScale = 1;
+      ringScale = 1;
+    });
+  });
+
+  requestAnimationFrame(updateCursor);
+}
+
+function initPageAnimations() {
+  gsap.from('.hero-title', {
+    y: 42,
+    opacity: 0,
+    duration: 1.2,
+    ease: 'power3.out',
+  });
+
+  gsap.from('.hero-subtitle, .hero-description, .hero-actions .btn', {
+    y: 28,
+    opacity: 0,
+    duration: 1,
+    ease: 'power3.out',
+    stagger: 0.16,
+    delay: 0.3,
+  });
+
+  gsap.from('.profile-card', {
+    y: 30,
+    opacity: 0,
+    duration: 1.2,
+    ease: 'power3.out',
+    delay: 0.4,
+  });
+
+  gsap.from('.skill-card', {
+    y: 18,
+    opacity: 0,
+    duration: 1.1,
+    ease: 'power3.out',
+    stagger: 0.12,
+    delay: 0.7,
+  });
+
+  gsap.from('.project-card', {
+    y: 22,
+    opacity: 0,
+    duration: 1.1,
+    ease: 'power3.out',
+    stagger: 0.12,
+    delay: 0.9,
+  });
+}
+
+function setupSectionObserver() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        const id = entry.target.id;
+        const link = document.querySelector(`.nav-links a[href='#${id}']`);
+        if (entry.isIntersecting && link) {
+          navLinks.forEach(nav => nav.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  sections.forEach(section => observer.observe(section));
+}
+
+function initPageScrollEffects() {
+  const topbar = document.getElementById('topbar');
+  if (!topbar) return;
+
+  const onScroll = () => {
+    if (window.scrollY > 20) {
+      topbar.classList.add('scrolled');
+    } else {
+      topbar.classList.remove('scrolled');
+    }
+  };
+
+  onScroll();
+  window.addEventListener('scroll', onScroll);
 }
